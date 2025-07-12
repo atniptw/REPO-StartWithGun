@@ -1,0 +1,8 @@
+﻿<Project>
+    <PropertyGroup>
+        <GameDirectory>D:\SteamLibrary\steamapps\common\REPO</GameDirectory>
+        <ProfileName>Default</ProfileName>
+        <BepInExDirectory>$(AppData)\Thunderstore Mod Manager\DataFolder\REPO\profiles\$(ProfileName)\BepInEx</BepInExDirectory>
+        <StartArguments>--doorstop-enable true --doorstop-target "$(BepInExDirectory)\core\BepInEx.Preloader.dll" --gale-profile "$(ProfileName)"</StartArguments>
+    </PropertyGroup>
+</Project>
