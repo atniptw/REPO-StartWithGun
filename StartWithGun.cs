@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
-using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace StartWithGun;
 
-[BepInPlugin("UsagiDev.StartWithGun", "StartWithGun", "1.0.1")]
+[BepInPlugin("UsagiDev.StartWithGun", "StartWithGun", "1.0.2")]
+[BepInDependency("nickklmao.menulib")]
+[BepInDependency("nickklmao.repoconfig")]
 public class StartWithGun : BaseUnityPlugin
 {
     internal static StartWithGun Instance { get; private set; } = null!;
@@ -18,19 +18,25 @@ public class StartWithGun : BaseUnityPlugin
     private ManualLogSource _logger => base.Logger;
     internal Harmony? Harmony { get; set; }
 
-    static ConfigEntry<string> gun;
+    internal static ConfigEntry<string> gun = null!;
 
     private void Awake()
     {
         Instance = this;
 
-        // Prevent the plugin from being deleted
         this.gameObject.transform.parent = null;
         this.gameObject.hideFlags = HideFlags.HideAndDontSave;
 
-        gun = this.Config.Bind("Default Item Asset Name", "Gun", "Item Gun Handgun");
+        gun = this.Config.Bind(
+            "Default Item Asset Name",
+            "Gun",
+            "Item Gun Handgun",
+            new ConfigDescription("The item to receive at the start of each run.", null, "HideFromREPOConfig")
+        );
+
         Patch();
         SceneManager.sceneLoaded += OnSceneLoaded;
+        ItemSelectionMenu.Register();
 
         Logger.LogInfo($"{Info.Metadata.GUID} v{Info.Metadata.Version} has loaded!");
     }
@@ -39,13 +45,12 @@ public class StartWithGun : BaseUnityPlugin
     {
         if (SemiFunc.RunIsLevel() && SemiFunc.IsMasterClientOrSingleplayer())
         {
-            var purchased = StatsManager.instance.itemsPurchased;
             var itemAssetName = gun.Value;
-            if (!purchased.TryGetValue(itemAssetName, out var count) || count == 0)
+            if (ItemGranter.TryGrantItem(
+                StatsManager.instance.itemsPurchased,
+                StatsManager.instance.itemsPurchasedTotal,
+                itemAssetName))
             {
-                purchased[itemAssetName] = 1;
-                StatsManager.instance.itemsPurchasedTotal.TryGetValue(itemAssetName, out var total);
-                StatsManager.instance.itemsPurchasedTotal[itemAssetName] = total + 1;
                 Logger.LogInfo($"Added {itemAssetName}");
             }
         }

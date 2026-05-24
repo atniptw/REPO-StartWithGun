@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <Authors>UsagiDev</Authors>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
@@ -17,6 +17,23 @@
             https://nuget.windows10ce.com/nuget/v3/index.json
         </RestoreAdditionalProjectSources>
     </PropertyGroup>
+
+    <!-- Exclude test project from main compilation -->
+    <ItemGroup>
+        <Compile Remove="StartWithGun.Tests/**" />
+    </ItemGroup>
+
+    <!-- Local DLL References -->
+    <ItemGroup>
+        <Reference Include="MenuLib">
+            <HintPath>libs/MenuLib.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="REPOConfig">
+            <HintPath>libs/REPOConfig.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
 
     <!-- Package References -->
     <ItemGroup>
