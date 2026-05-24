@@ -1,3 +1,4 @@
 bin/
-obj/Debug
-obj/Release
+obj/
+plugins/
+CLAUDE.md
