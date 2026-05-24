@@ -1,10 +1,9 @@
 ﻿{
   "name": "StartWithGun",
-  "version_number": "1.0.2",
+  "version_number": "1.0.3",
   "website_url": "https://github.com/luiscassih/REPO-StartWithGun",
   "description": "Start a run with a gun or any other item you want",
   "dependencies": [
-    "BepInEx-BepInExPack-5.4.2100",
-    "nickklmao-MenuLib-2.5.3"
+    "BepInEx-BepInExPack-5.4.2100"
   ]
 }

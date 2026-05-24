@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <Authors>UsagiDev</Authors>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
@@ -21,14 +21,6 @@
     <!-- Exclude test project from main compilation -->
     <ItemGroup>
         <Compile Remove="StartWithGun.Tests/**" />
-    </ItemGroup>
-
-    <!-- Local DLL References -->
-    <ItemGroup>
-        <Reference Include="MenuLib">
-            <HintPath>libs/MenuLib.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
     </ItemGroup>
 
     <!-- Package References -->

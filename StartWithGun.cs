@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace StartWithGun;
 
-[BepInPlugin("UsagiDev.StartWithGun", "StartWithGun", "1.0.2")]
-[BepInDependency("nickklmao.menulib")]
+[BepInPlugin("UsagiDev.StartWithGun", "StartWithGun", "1.0.3")]
 public class StartWithGun : BaseUnityPlugin
 {
     internal static StartWithGun Instance { get; private set; } = null!;
@@ -30,12 +29,63 @@ public class StartWithGun : BaseUnityPlugin
             "Default Item Asset Name",
             "Gun",
             "Item Gun Handgun",
-            new ConfigDescription("The item to receive at the start of each run.", null, "HideFromREPOConfig")
+            new ConfigDescription(
+                "The item to receive at the start of each run.",
+                new AcceptableValueList<string>(
+                    // Carts
+                    "Item Cart Medium",
+                    "Item Cart Small",
+                    // Drones
+                    "Item Drone Battery",
+                    "Item Drone Feather",
+                    "Item Drone Indestructible",
+                    "Item Drone Torque",
+                    "Item Drone Zero Gravity",
+                    // Grenades
+                    "Item Grenade Duct Taped",
+                    "Item Grenade Explosive",
+                    "Item Grenade Human",
+                    "Item Grenade Shockwave",
+                    "Item Grenade Stun",
+                    // Guns
+                    "Item Gun Handgun",
+                    "Item Gun Shotgun",
+                    "Item Gun Tranq",
+                    // Health
+                    "Item Health Pack Large",
+                    "Item Health Pack Medium",
+                    "Item Health Pack Small",
+                    // Melee
+                    "Item Melee Baseball Bat",
+                    "Item Melee Frying Pan",
+                    "Item Melee Inflatable Hammer",
+                    "Item Melee Sledge Hammer",
+                    "Item Melee Sword",
+                    // Mines
+                    "Item Mine Explosive",
+                    "Item Mine Shockwave",
+                    "Item Mine Stun",
+                    // Misc
+                    "Item Extraction Tracker",
+                    "Item Orb Zero Gravity",
+                    "Item Power Crystal",
+                    "Item Rubber Duck",
+                    "Item Valuable Tracker",
+                    // Upgrades
+                    "Item Upgrade Map Player Count",
+                    "Item Upgrade Player Energy",
+                    "Item Upgrade Player Extra Jump",
+                    "Item Upgrade Player Grab Range",
+                    "Item Upgrade Player Grab Strength",
+                    "Item Upgrade Player Health",
+                    "Item Upgrade Player Sprint Speed",
+                    "Item Upgrade Player Tumble Launch"
+                )
+            )
         );
 
         Patch();
         SceneManager.sceneLoaded += OnSceneLoaded;
-        ItemSelectionMenu.Register();
 
         Logger.LogInfo($"{Info.Metadata.GUID} v{Info.Metadata.Version} has loaded!");
     }
