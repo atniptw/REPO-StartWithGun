@@ -10,7 +10,6 @@ namespace StartWithGun;
 
 [BepInPlugin("UsagiDev.StartWithGun", "StartWithGun", "1.0.2")]
 [BepInDependency("nickklmao.menulib")]
-[BepInDependency("nickklmao.repoconfig")]
 public class StartWithGun : BaseUnityPlugin
 {
     internal static StartWithGun Instance { get; private set; } = null!;

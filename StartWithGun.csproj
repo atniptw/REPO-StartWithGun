@@ -29,10 +29,6 @@
             <HintPath>libs/MenuLib.dll</HintPath>
             <Private>false</Private>
         </Reference>
-        <Reference Include="REPOConfig">
-            <HintPath>libs/REPOConfig.dll</HintPath>
-            <Private>false</Private>
-        </Reference>
     </ItemGroup>
 
     <!-- Package References -->

@@ -5,7 +5,6 @@
   "description": "Start a run with a gun or any other item you want",
   "dependencies": [
     "BepInEx-BepInExPack-5.4.2100",
-    "nickklmao-MenuLib-2.5.3",
-    "nickklmao-REPOConfig-1.2.6"
+    "nickklmao-MenuLib-2.5.3"
   ]
 }
