@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace StartWithGun;
 
-[BepInPlugin("UsagiDev.StartWithGun", "StartWithGun", "1.0.0")]
+[BepInPlugin("UsagiDev.StartWithGun", "StartWithGun", "1.0.1")]
 public class StartWithGun : BaseUnityPlugin
 {
     internal static StartWithGun Instance { get; private set; } = null!;
@@ -41,10 +41,11 @@ public class StartWithGun : BaseUnityPlugin
         {
             var purchased = StatsManager.instance.itemsPurchased;
             var itemAssetName = gun.Value;
-            if (purchased.TryGetValue(itemAssetName, out var count) && count == 0)
+            if (!purchased.TryGetValue(itemAssetName, out var count) || count == 0)
             {
-                purchased[itemAssetName]++;
-                StatsManager.instance.itemsPurchasedTotal[itemAssetName]++;
+                purchased[itemAssetName] = 1;
+                StatsManager.instance.itemsPurchasedTotal.TryGetValue(itemAssetName, out var total);
+                StatsManager.instance.itemsPurchasedTotal[itemAssetName] = total + 1;
                 Logger.LogInfo($"Added {itemAssetName}");
             }
         }
